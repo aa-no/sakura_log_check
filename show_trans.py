@@ -4,7 +4,7 @@ import time
 import sys
 
 def run_command():
-    return subprocess.run('./newest_trans.sh', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout
+    return subprocess.run('./latest_assistant.sh', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout
 
 # def clear_previous_output(num_lines):
 #     for _ in range(num_lines):
