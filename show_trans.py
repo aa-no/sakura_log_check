@@ -2,9 +2,15 @@
 import subprocess
 import time
 import sys
+import re
 
 def run_command():
-    return subprocess.run('./latest_assistant.sh', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout
+    output = subprocess.run('./latest_assistant.sh', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout
+    match = re.search(r'"role": "assistant", "content": "(.*?)"', output)
+    if match:
+        assistant_content = match.group(1)
+        assistant_content = bytes(assistant_content, "utf-8").decode("unicode_escape")
+        return assistant_content
 
 # def clear_previous_output(num_lines):
 #     for _ in range(num_lines):
@@ -12,7 +18,6 @@ def run_command():
 #         sys.stdout.write("\033[K")  # 清除当前行
 
 r = run_command()
-
 print(r, end='', flush=True)
 previous_lines = r.splitlines()
 
