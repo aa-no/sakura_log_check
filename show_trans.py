@@ -11,6 +11,7 @@ def run_command():
         assistant_content = match.group(1)
         assistant_content = bytes(assistant_content, "utf-8").decode("unicode_escape")
         return assistant_content
+    return ''
 
 # def clear_previous_output(num_lines):
 #     for _ in range(num_lines):
@@ -23,7 +24,9 @@ previous_lines = r.splitlines()
 
 while True:
     # 每秒钟获取新输出
-    nr = run_command()
+    nrr = run_command()
+    if nrr != '':
+        nr = nrr
     time.sleep(1)
     
     if nr == r:
